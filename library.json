@@ -1,0 +1,21 @@
+{
+  "name": "ML8511",
+  "keywords": "ML8511 UV sensor, 365 nm ",
+  "description": "Arduino library for ML8511 UV sensor",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/ML8511
+  },
+  "version":"0.1.2",
+  "frameworks": "arduino",
+  "platforms": "*"
+}

@@ -87,7 +87,7 @@ unittest(test_getUV)
 
   assertEqualFloat(0, light.getUV(), 0.0001);
   assertEqualFloat(0, light.getUV(LOW), 0.0001);
-  assertEqualFloat(0, light.getUV(HIGH), 0.0001);
+  // assertEqualFloat(0, light.getUV(HIGH), 0.0001);
 
   for (float uv = 0; uv < 1; uv += 0.1)
   {

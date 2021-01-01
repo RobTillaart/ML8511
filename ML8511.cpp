@@ -20,10 +20,9 @@ ML8511::ML8511(uint8_t analogPin, uint8_t enablePin)
 {
   _analogPin = analogPin;
   _voltsPerStep = 5.0/1023;
-  
+  _enablePin = enablePin;
   if (enablePin != 0xFF)
   {
-    _enablePin = enablePin;
     pinMode(_enablePin, OUTPUT);
     digitalWrite(_enablePin, LOW);
     _enabled = false;
@@ -88,14 +87,14 @@ void  ML8511::setVoltsPerStep(float voltage, uint32_t steps)
 
 void ML8511::enable()
 {
-  digitalWrite(_enablePin, HIGH);
+  if (_enablePin != 0xFF) digitalWrite(_enablePin, HIGH);
   _enabled = true;
 };
 
 
 void ML8511::disable()
 {
-  digitalWrite(_enablePin, LOW);
+  if (_enablePin != 0xFF) digitalWrite(_enablePin, LOW);
   _enabled = false;
 };
 

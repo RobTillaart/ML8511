@@ -37,7 +37,7 @@
 
 
 #include "Arduino.h"
-#include "XXXXX.h"
+#include "ML8511.h"
 
 
 
@@ -62,12 +62,41 @@ unittest(test_new_operator)
 }
 */
 
+#define ANALOGPIN         0
+
 unittest(test_constructor)
 {
-  fprintf(stderr, "VERSION: %s\n", );
-  
-  assertEqual(1, 1);
+  fprintf(stderr, "VERSION: %s\n", ML8511_LIB_VERSION);
+
+  ML8511 light(ANALOGPIN);
+
+  assertEqualFloat(5.0/1023, light.getVoltsPerStep(), 0.0001);
+  light.setVoltsPerStep(3.3, 4095);
+  assertEqualFloat(3.3/4095, light.getVoltsPerStep(), 0.0001);
+
+  assertTrue(light.isEnabled());
+  light.disable();
+  assertFalse(light.isEnabled());
+  light.enable();
+  assertTrue(light.isEnabled());
 }
+
+unittest(test_getUV)
+{
+  ML8511 light(ANALOGPIN);
+
+  assertEqualFloat(0, light.getUV(), 0.0001);
+  assertEqualFloat(0, light.getUV(LOW), 0.0001);
+  assertEqualFloat(0, light.getUV(HIGH), 0.0001);
+
+  for (float uv = 0; uv < 1; uv += 0.1)
+  {
+    fprintf(stderr, "%f\t", uv);
+    assertEqualFloat(0, light.estimateDUVindex(0), 0.0001);
+  }
+}
+
+
 
 unittest_main()
 

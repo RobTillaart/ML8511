@@ -36,6 +36,7 @@ public:
 
   // voltage must be > 0 otherwise it is not set
   void     setVoltsPerStep(float voltage, uint32_t steps);
+  float    getVoltsPerStep() { return _voltsPerStep; };
 
   // manually enable / disable
   void     enable();

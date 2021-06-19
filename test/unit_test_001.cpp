@@ -72,6 +72,10 @@ unittest(test_constructor)
   light.setVoltsPerStep(3.3, 4095);
   assertEqualFloat(3.3/4095, light.getVoltsPerStep(), 0.0001);
 
+  reset()
+  assertEqualFloat(5.0/1023, light.getVoltsPerStep(), 0.0001);
+
+
   assertTrue(light.isEnabled());
   light.disable();
   assertFalse(light.isEnabled());
@@ -90,11 +94,57 @@ unittest(test_getUV)
   light.enable();
   assertEqualFloat(0, light.getUV(HIGH), 0.0001);
 
-  for (float uv = 0; uv < 1; uv += 0.1)
+}
+
+
+unittest(test_setDUVfactor)
+{
+  ML8511 light(ANALOGPIN);
+
+  light.enable();
+
+  for (float factor = 0.10; factor < 2.01; factor += 0.1)
   {
-    fprintf(stderr, "%f\t", uv);
-    assertEqualFloat(0, light.estimateDUVindex(0), 0.0001);
+    light.setDUVfactor(factor);
+    assertEqualFloat(factor, getDUVfactor(), 0.0001);
   }
+
+  fprintf(stderr, "\nOUT OF RANGE\n");
+  assertTrue(light.setDUVfactor(0.577));
+  assertEqualFloat(0.577, getDUVfactor(), 0.0001);
+
+  assertFalse(light.setDUVfactor(0));
+  assertEqualFloat(0.577, getDUVfactor(), 0.0001);
+
+  assertFalse(light.setDUVfactor(-1.0));
+  assertEqualFloat(0.577, getDUVfactor(), 0.0001);
+  
+  reset();
+  assertEqualFloat(1.61, getDUVfactor(), 0.0001);
+}
+
+
+unittest(test_estimateDUVindex)
+{
+  ML8511 light(ANALOGPIN);
+
+  light.enable();
+
+  for (float mW = 0; mW < 10; mW += 0.1)
+  {
+    fprintf(stderr, "%f\t", mW);
+    fprintf(stderr, "%f\n", light.estimateDUVindex(mW));
+    assertEqualFloat(1.61 * mW, light.estimateDUVindex(mW), 0.0001);
+  }
+
+  light.setDUVfactor(1.0)
+  for (float mW = 0; mW < 10; mW += 0.1)
+  {
+    fprintf(stderr, "%f\t", mW);
+    fprintf(stderr, "%f\n", light.estimateDUVindex(mW));
+    assertEqualFloat(1.0 * mW, light.estimateDUVindex(mW), 0.0001);
+  }
+
 }
 
 

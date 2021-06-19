@@ -95,21 +95,21 @@ unittest(test_setDUVfactor)
   for (float factor = 0.10; factor < 2.01; factor += 0.1)
   {
     light.setDUVfactor(factor);
-    assertEqualFloat(factor, getDUVfactor(), 0.0001);
+    assertEqualFloat(factor, light.getDUVfactor(), 0.0001);
   }
 
   fprintf(stderr, "\nOUT OF RANGE\n");
   assertTrue(light.setDUVfactor(0.577));
-  assertEqualFloat(0.577, getDUVfactor(), 0.0001);
+  assertEqualFloat(0.577, light.getDUVfactor(), 0.0001);
 
   assertFalse(light.setDUVfactor(0));
-  assertEqualFloat(0.577, getDUVfactor(), 0.0001);
+  assertEqualFloat(0.577, light.getDUVfactor(), 0.0001);
 
   assertFalse(light.setDUVfactor(-1.0));
-  assertEqualFloat(0.577, getDUVfactor(), 0.0001);
+  assertEqualFloat(0.577, light.getDUVfactor(), 0.0001);
   
   light.reset();
-  assertEqualFloat(1.61, getDUVfactor(), 0.0001);
+  assertEqualFloat(1.61, light.getDUVfactor(), 0.0001);
 }
 
 

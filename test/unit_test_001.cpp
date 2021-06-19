@@ -64,7 +64,6 @@ unittest(test_constructor)
   light.reset();
   assertEqualFloat(5.0/1023, light.getVoltsPerStep(), 0.0001);
 
-
   assertTrue(light.isEnabled());
   light.disable();
   assertFalse(light.isEnabled());
@@ -75,14 +74,28 @@ unittest(test_constructor)
 
 unittest(test_getUV)
 {
-  ML8511 light(ANALOGPIN);
+  ML8511 light(ANALOGPIN);  // no/default enable pin
 
   assertEqualFloat(0, light.getUV(), 0.0001);
+  assertTrue(light.isEnabled());
   assertEqualFloat(0, light.getUV(LOW), 0.0001);
-
-  light.enable();
+  assertTrue(light.isEnabled());
   assertEqualFloat(0, light.getUV(HIGH), 0.0001);
+  assertTrue(light.isEnabled());
+}
 
+
+
+unittest(test_getUV_2)
+{
+  ML8511 light(ANALOGPIN, 4);  //  set enable pin
+
+  assertEqualFloat(0, light.getUV(), 0.0001);
+  assertTrue(light.isEnabled());
+  assertEqualFloat(0, light.getUV(LOW), 0.0001);
+  assertFalse(light.isEnabled());
+  assertEqualFloat(0, light.getUV(HIGH), 0.0001);
+  assertTrue(light.isEnabled());
 }
 
 

@@ -126,7 +126,7 @@ unittest(test_estimateDUVindex)
     assertEqualFloat(1.61 * mW, light.estimateDUVindex(mW), 0.0001);
   }
 
-  light.setDUVfactor(1.0)
+  light.setDUVfactor(1.0);
   for (float mW = 0; mW < 10; mW += 0.1)
   {
     fprintf(stderr, "%f\t", mW);

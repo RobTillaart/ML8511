@@ -79,7 +79,7 @@ unittest(test_getUV)
   assertEqualFloat(0, light.getUV(), 0.0001);
   assertTrue(light.isEnabled());
   assertEqualFloat(0, light.getUV(LOW), 0.0001);
-  assertTrue(light.isEnabled());
+  assertFalse(light.isEnabled());
   assertEqualFloat(0, light.getUV(HIGH), 0.0001);
   assertTrue(light.isEnabled());
 }

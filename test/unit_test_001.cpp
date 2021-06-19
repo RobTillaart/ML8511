@@ -74,10 +74,13 @@ unittest(test_constructor)
 
 unittest(test_getUV)
 {
+  // need godmode to fill the analogRead...
+
   GodmodeState* state = GODMODE();
   state->reset();
   int future[6] = {0, 0, 0, 400, 500, 600};
-  
+  state->analogPin[1].fromArray(future, 6);
+
   ML8511 light(ANALOGPIN);  // no/default enable pin
 
   assertEqualFloat(0, light.getUV(), 0.0001);

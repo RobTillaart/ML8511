@@ -91,7 +91,7 @@ float ML8511::estimateDUVindex(float mWcm2)
 };
 
 
-void ML8511::setDUVfactor(float f)
+bool ML8511::setDUVfactor(float f)
 {
   if (f < 0.01) return false;  // enforce positive values 
   _DUVfactor = f; 

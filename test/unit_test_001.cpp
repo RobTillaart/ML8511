@@ -61,7 +61,7 @@ unittest(test_constructor)
   light.setVoltsPerStep(3.3, 4095);
   assertEqualFloat(3.3/4095, light.getVoltsPerStep(), 0.0001);
 
-  reset();
+  light.reset();
   assertEqualFloat(5.0/1023, light.getVoltsPerStep(), 0.0001);
 
 
@@ -108,7 +108,7 @@ unittest(test_setDUVfactor)
   assertFalse(light.setDUVfactor(-1.0));
   assertEqualFloat(0.577, getDUVfactor(), 0.0001);
   
-  reset();
+  light.reset();
   assertEqualFloat(1.61, getDUVfactor(), 0.0001);
 }
 

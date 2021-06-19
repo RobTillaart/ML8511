@@ -29,6 +29,7 @@
 // assertNAN(arg);                                 // isnan(a)
 // assertNotNAN(arg);                              // !isnan(a)
 
+
 #include <ArduinoUnitTests.h>
 
 
@@ -46,21 +47,9 @@ unittest_teardown()
 {
 }
 
-/*
-unittest(test_new_operator)
-{
-  assertEqualINF(exp(800));
-  assertEqualINF(0.0/0.0);
-  assertEqualINF(42);
-  
-  assertEqualNAN(INFINITY - INFINITY);
-  assertEqualNAN(0.0/0.0);
-  assertEqualNAN(42);
-}
-*/
-
 
 #define ANALOGPIN         0
+
 
 unittest(test_constructor)
 {
@@ -72,7 +61,7 @@ unittest(test_constructor)
   light.setVoltsPerStep(3.3, 4095);
   assertEqualFloat(3.3/4095, light.getVoltsPerStep(), 0.0001);
 
-  reset()
+  reset();
   assertEqualFloat(5.0/1023, light.getVoltsPerStep(), 0.0001);
 
 

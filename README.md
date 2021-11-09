@@ -130,6 +130,26 @@ Based upon https://en.wikipedia.org/wiki/Ultraviolet_index,
 |           |             |
 
 
+#### Calibrate estimateDUVindex()
+
+To calibrate the **estimateDUVindex()** function one needs to determine the DUVfactor. 
+To do this you need an external reference e.g. a local or nearby weather station. 
+You need to make multiple measurements during the (preferably unclouded) day and 
+calculate the factor.
+
+```
+          DUV from weather station
+factor = --------------------------
+                  getUV();
+```
+
+you do this e.g. once per hour, so you get multiple values.
+You can then average them to have a single factor.
+
+Hardcode this found value in the library (in the constructor) or better
+use the **setDUVfactor(factor)** call in **setup()** to calibrate your sensor.
+
+
 #### 0.1.5 and before
 
 The formula for the experimental **estimateDUVindex(mWcm2)** is based on
@@ -149,33 +169,13 @@ The formula is simplified to a single factor that the user needs to determine.
 Below is described how to do the calibration. 
 
 
-#### 0.1.7
+## External ADC
 
 **float voltage2mW(float voltage)** can be used for an external ADC e.g ADS1015,
 ADS1115 or one of the (fast) MCP_ADC's.
 
 https://github.com/RobTillaart/ADS1X15 
 https://github.com/RobTillaart/MCP_ADC
-
-
-#### Calibrate estimateDUVindex()
-
-To calibrate the **estimateDUVindex()** function one needs to determine the DUVfactor. 
-To do this you need an external reference e.g. a local or nearby weather station. 
-You need to make multiple measurements during the (preferably unclouded) day and 
-calculate the factor.
-
-```
-          DUV from weather station
-factor = --------------------------
-                  getUV();
-```
-
-you do this e.g. once per hour, so you get multiple values.
-You can then average them to have a single factor.
-
-Hardcode this found value in the library (in the constructor) or better
-use the **setDUVfactor(factor)** call in **setup()** to calibrate your sensor.
 
 
 ## More about UV

@@ -18,7 +18,7 @@
 
 #include <Arduino.h>
 
-#define ML8511_LIB_VERSION            (F("0.1.6"))
+#define ML8511_LIB_VERSION            (F("0.1.7"))
 
 
 class ML8511

@@ -191,6 +191,7 @@ https://en.wikipedia.org/wiki/Ultraviolet_index
 
 ## Future
 
+- refactor / reorganize readme.md
 - test more
 - get unit tests up and running
 - investigate in calibration 

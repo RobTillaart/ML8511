@@ -174,7 +174,7 @@ unittest(test_estimateDUVindex)
 
   // output a table
   fprintf(stderr, "mW\tDUV\n");
-  for (float mW = 0; mW < 10; mW += 0.1)
+  for (float mW = 0; mW < 10; mW += 0.5)
   {
     fprintf(stderr, "%f\t", mW);
     fprintf(stderr, "%f\n", light.estimateDUVindex(mW));
@@ -182,14 +182,14 @@ unittest(test_estimateDUVindex)
   fprintf(stderr, "\n");
 
   assertEqualFloat(1.61, light.getDUVfactor(), 0.0001);
-  for (float mW = 0; mW < 10; mW += 0.1)
+  for (float mW = 0; mW < 10; mW += 0.5)
   {
     assertEqualFloat(1.61 * mW, light.estimateDUVindex(mW), 0.0001);
   }
 
   light.setDUVfactor(1.0);
   assertEqualFloat(1.0, light.getDUVfactor(), 0.0001);
-  for (float mW = 0; mW < 10; mW += 0.1)
+  for (float mW = 0; mW < 10; mW += 0.5)
   {
     //  fprintf(stderr, "%f\t", mW);
     //  fprintf(stderr, "%f\n", light.estimateDUVindex(mW));

@@ -1,7 +1,10 @@
 
 [![Arduino CI](https://github.com/RobTillaart/ML8511/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+[![Arduino-lint](https://github.com/RobTillaart/ML8511/actions/workflows/arduino-lint.yml/badge.svg)](https://github.com/RobTillaart/ML8511/actions/workflows/arduino-lint.yml)
+[![JSON check](https://github.com/RobTillaart/ML8511/actions/workflows/jsoncheck.yml/badge.svg)](https://github.com/RobTillaart/ML8511/actions/workflows/jsoncheck.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/ML8511/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/RobTillaart/ML8511.svg?maxAge=3600)](https://github.com/RobTillaart/ML8511/releases)
+
 
 # ML8511
 
@@ -58,13 +61,17 @@ sensor. Use a voltage divider (10K + 20K) to convert the 5 Volts to ~3.3 Volts.
 
 ## Interface
 
-- **ML8511(uint8_t analogPin, uint8_t enablePin = 0xFF)** Constructor, if enable is connected to 3V3 constantly one does not need to set the enablePin parameter.
-- **float getUV(uint8_t energyMode = HIGH)** returns mW per cm2, energyMode = HIGH or LOW
-- **void setVoltsPerStep(float voltage, uint32_t steps)** to calibrate the (Internal) ADC used. Voltage must be > 0 otherwise it is not set and the default of 5 volts 1023 steps is used.
-- **float getVoltsPerStep()** idem
-- **void enable()** manually enable
-- **void disable()** manually disable
-- **bool isEnabled()** get status.
+- **ML8511(uint8_t analogPin, uint8_t enablePin = 0xFF)** Constructor, 
+if enable is connected to 3V3 constantly one does not need to set the enablePin parameter.
+- **float getUV(uint8_t energyMode = HIGH)** returns mW per cm2, energyMode = HIGH or LOW.
+LOW will disable the sensor after reading.
+- **float voltage2mW(float voltage)** returns mW per cm2 from voltage. To be used when one uses an external ADC e.g. ADS1115
+- **void setVoltsPerStep(float voltage, uint32_t steps)** to calibrate the (Internal) ADC used. 
+Voltage must be > 0 otherwise it is not set and the default of 5 volts 1023 steps is used.
+- **float getVoltsPerStep()** idem.
+- **void enable()** manually enable.
+- **void disable()** manually disable.
+- **bool isEnabled()** get enabled status.
 
 
 #### experimental
@@ -72,10 +79,18 @@ sensor. Use a voltage divider (10K + 20K) to convert the 5 Volts to ~3.3 Volts.
 WARNING: USE WITH CARE
 
 - **float estimateDUVindex(float mWcm2)** input in mW per cm2, returns a value between 0 and ~15(?)
-- **void setDUVfactor(float f)** set the conversion factor
+- **void setDUVfactor(float factor)** set the conversion factor
 - **float getDUVfactor()** returns the set conversion factor (default 1.61)
 
 See below how to determine the DUV factor for your sensor.
+
+Note: 
+The UV index can be very high, in La Paz, Bolivia, one of the highest cities in the world
+the DUV index can go above 20. See link below.
+This is really extreme and it is unknown how the ML8511 sensor (and this library) behaves.
+Datasheet goes up to 15 mW per cm2, with a default DUVfactor of ~1.61 it could handle DUV = 24.
+
+https://edition.cnn.com/2021/11/03/americas/bolivia-heatwave-highlands-intl/index.html
 
 
 ## Sensor sensitivity
@@ -96,6 +111,7 @@ with an absolute peak at λ = 365 nm.
 Note: this library is **NOT** calibrated so **USE AT OWN RISK**
 
 The DUV index can be used for warning for sunburn etc.
+
 
 #### DUV index table
 
@@ -129,12 +145,21 @@ The formula is simplified to a single factor that the user needs to determine.
 Below is described how to do the calibration. 
 
 
+#### 0.1.7
+
+**float voltage2mW(float voltage)** can be used for an external ADC like the ADS1015,
+ADS1115 or one of the MCP_ADC'safest
+
+https://github.com/RobTillaart/ADS1X15 
+https://github.com/RobTillaart/MCP_ADC
+
+
 #### Calibrate estimateDUVindex()
 
-To calibrate the **estimateDUVindex()** function one needs to determine
-the DUVfactor. To do this you need an external reference e.g. a local or nearby
-weather station. You need to make multiple measurements during the
-(preferably unclouded) day and calculate the factor.
+To calibrate the **estimateDUVindex()** function one needs to determine the DUVfactor. 
+To do this you need an external reference e.g. a local or nearby weather station. 
+You need to make multiple measurements during the (preferably unclouded) day and 
+calculate the factor.
 
 ```
           DUV from weather station
@@ -156,7 +181,16 @@ https://en.wikipedia.org/wiki/Ultraviolet_index
 
 ## Notes
 
-- 3V3 Sensor so do not connect to 5V directly.
+- 3V3 Sensor so do **NOT** connect to 5V directly.
 - do not forget to connect the EN to either an enablePIN or to 3V3 (constantly enabled).
-- library does not work with an external ADC. (todo?)
+
+
+## Future
+
+- test more
+- get unit tests up and running
+- investigate in calibration 
+- check performance
+- investigate serial UV communication with UV led
+- 
 

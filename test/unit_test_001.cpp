@@ -53,7 +53,7 @@ unittest_teardown()
 
 unittest(test_constructor)
 {
-  fprintf(stderr, "VERSION: %s\n", ML8511_LIB_VERSION);
+  fprintf(stderr, "VERSION: %s\n", (char *) ML8511_LIB_VERSION);
 
   ML8511 light(ANALOGPIN);
 
@@ -119,6 +119,20 @@ unittest(test_getUV_2)
   assertTrue(light.isEnabled());
 }
 */
+
+
+// External ADC
+unittest(test_voltage2mW)
+{
+  ML8511 light(ANALOGPIN);
+
+  assertEqualFloat(0, light.voltage2mW(0.0), 0.001);
+  assertEqualFloat(0, light.voltage2mW(0.5), 0.001);
+  assertEqualFloat(0, light.voltage2mW(1.0), 0.001);
+  assertEqualFloat(0, light.voltage2mW(2.0), 0.001);
+  assertEqualFloat(0, light.voltage2mW(3.0), 0.001);
+  assertEqualFloat(0, light.voltage2mW(3.3), 0.001);
+}
 
 
 unittest(test_setDUVfactor)

@@ -18,5 +18,6 @@
   "version": "0.1.7",
   "license": "MIT",
   "frameworks": "arduino",
-  "platforms": "*"
+  "platforms": "*",
+  "headers": "ML8511.h"
 }

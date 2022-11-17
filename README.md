@@ -24,17 +24,20 @@ When using artificial UV light (TL LED laser a.o.) use appropriate shielding.
 
 ML8511 - UV sensor - library for Arduino UNO. 
 
+- 3V3 Sensor so do **NOT** connect to 5V directly.
+- do not forget to connect the EN to either an enablePIN or to 3V3 (constantly enabled).
 
-## Breakout
+
+#### Breakout
 
 ```
-//      +-------+--+
-//  VIN |o      +-+| mounting hole
-//  3V3 |o      +-+|
-//  GND |o         |
-//  OUT |o         |
-//   EN |o       S |  Sensor
-//      +----------+
+//        +-------+--+
+//    VIN |o      +-+| mounting hole
+//    3V3 |o      +-+|
+//    GND |o         |
+//    OUT |o         |
+//     EN |o       S |  Sensor
+//        +----------+
 ```
 
 
@@ -150,6 +153,8 @@ Hardcode this found value in the library (in the constructor) or better
 use the **setDUVfactor(factor)** call in **setup()** to calibrate your sensor.
 
 
+## Version info
+
 #### 0.1.5 and before
 
 The formula for the experimental **estimateDUVindex(mWcm2)** is based on
@@ -169,16 +174,6 @@ The formula is simplified to a single factor that the user needs to determine.
 Below is described how to do the calibration. 
 
 
-#### 0.1.7
-
-- update Arduino-CI, badges
-- add voltage2mW() for external ADC
-
-
-#### 0.1.8
-
--  update library.json, license, minor edits
-
 
 ## External ADC
 
@@ -194,20 +189,22 @@ https://github.com/RobTillaart/MCP_ADC
 https://en.wikipedia.org/wiki/Ultraviolet_index
 
 
-## Notes
-
-- 3V3 Sensor so do **NOT** connect to 5V directly.
-- do not forget to connect the EN to either an enablePIN or to 3V3 (constantly enabled).
 
 
 ## Future
 
+#### must
+- update documentation
 - refactor / reorganize readme.md
+
+#### should
 - test more
 - get unit tests up and running
 - investigate in calibration 
 - check performance
+
+#### could
 - investigate serial UV communication with UV led
 - voltage2mW -> handle negative voltages by taking abs value?
-- 
+
 

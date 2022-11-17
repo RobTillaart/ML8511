@@ -96,10 +96,22 @@ bool ML8511::setDUVfactor(float factor)
 };
 
 
+float ML8511::getDUVfactor()
+{
+  return _DUVfactor;
+};
+
+
 void  ML8511::setVoltsPerStep(float voltage, uint32_t steps)
 {
   if (steps == 0) return;
   if (voltage > 0.0) _voltsPerStep = voltage / steps;
+}
+
+
+float  ML8511::getVoltsPerStep()
+{
+  return _voltsPerStep;
 }
 
 
@@ -114,6 +126,12 @@ void ML8511::disable()
 {
   if (_enablePin != 0xFF) digitalWrite(_enablePin, LOW);
   _enabled = false;
+};
+
+
+bool ML8511::isEnabled()
+{
+  return _enabled;
 };
 
 

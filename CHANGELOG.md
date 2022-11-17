@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.1.9] - 2022-11-17
 - add RP2040 in build-CI
 - add changelog.md
+- moved all code to .cpp file
 - edit readme.md
 - minor edits
 

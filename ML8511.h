@@ -41,12 +41,12 @@ public:
 
   //  voltage must be > 0 otherwise it is not set
   void     setVoltsPerStep(float voltage, uint32_t steps);
-  float    getVoltsPerStep() { return _voltsPerStep; };
+  float    getVoltsPerStep();
 
   //  manually enable / disable
   void     enable();
   void     disable();
-  bool     isEnabled() { return _enabled; };
+  bool     isEnabled();
 
 
   //  experimental estimate DUV index
@@ -62,9 +62,9 @@ public:
   //  the estimateDUVindex() conversion function.
   //  a value of 1.61 was found to be far more accurate
   //
-  //  returns false  if f < 0.01 (to force positive only)
+  //  returns false  if f < 0.01 (to force positive factor only)
   bool     setDUVfactor(float factor);
-  float    getDUVfactor() { return _DUVfactor; };
+  float    getDUVfactor();
 
 
 private:

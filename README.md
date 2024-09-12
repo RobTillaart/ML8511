@@ -261,7 +261,7 @@ https://en.wikipedia.org/wiki/Ultraviolet_index
 - math for duration of exposure
   - Converting from mW/cm2  ==> Joule / s / cm2
   - integrate sum of multiple measurements.
-  - ?
+  - experimental example?
 
 #### Wont
 

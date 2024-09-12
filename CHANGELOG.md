@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - change return type **enable()**
 - change return type **disable()**
 - reorder code in .cpp file to match .h file.
+- add experimental example - ML8511_cumulative_joule.ino
 - update readme.md
 - minor edits
 

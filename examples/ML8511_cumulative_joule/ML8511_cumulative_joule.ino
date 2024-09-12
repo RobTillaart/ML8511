@@ -2,7 +2,6 @@
 //    FILE: ML8511_cumulative_joule.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: demo UV sensor - EXPERIMENTAL
-//    DATE: 2020-06-21
 //     URL: https://github.com/RobTillaart/ML8511
 //
 //        BREAKOUT

@@ -49,6 +49,10 @@ float ML8511::getUV(uint8_t energyMode)
     uint32_t start = micros();
     while (micros() - start < 1000) yield();
   }
+  
+  // Override default bit resolution (Some higher end boards use 12bit, such as ESP32)
+  analogReadResolution(10); 
+  
   //  read the sensor
   float voltage = analogRead(_analogPin) * _voltsPerStep;
   //  go to low power mode?
